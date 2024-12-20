@@ -249,8 +249,8 @@ class Model(nn.Module):
         psnr = metrics.psnr((reconstruction + 1) / 2, (x + 1) / 2, 1, lib = "torch")
         
         # if (self.step_counter % self.log_interval == 1):
-        self.store_loss('perceptual rec', ssim_rec.item())
-        self.store_loss('mse rec', mse.item())
-        self.store_loss('psnr rec', psnr.item())
+        # self.store_loss('perceptual rec', ssim_rec.item())
+        # self.store_loss('mse rec', mse.item())
+        # self.store_loss('psnr rec', psnr.item())
         return mse, ssim_rec, psnr
 
