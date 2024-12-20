@@ -48,6 +48,8 @@ class Model(nn.Module):
         self.sample_noise = False
         self.normalize_input_image = True
         self.use_latent_mixture_model = False
+        self.likelihood_type = 'gaussian'
+        self.entropy_code = False
 
         #Trainable
         self.Encoder = encoder.Encoder(self.image_dims, C=self.latent_channels)
