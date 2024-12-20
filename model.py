@@ -20,7 +20,6 @@ import utils, metrics
 import encoder, generator
 
 from skimage.metrics import structural_similarity as ssim
-from pytorch_msssim import ms_ssim
 
 Intermediates = namedtuple("Intermediates",
     ["input_image",             # [0, 1] (after scaling from [0, 255])
@@ -180,11 +179,7 @@ class Model(nn.Module):
         """ Assumes inputs are in [0, 1] if normalize=True, else [-1, 1] """
         SSIM_loss = 1 - ssim(x_gen, x_real, data_range=1, size_average=True)
         return SSIM_loss
-    
-    def perceptual_msssim_loss(self, x_gen, x_real):
-        """ Assumes inputs are in [0, 1] if normalize=True, else [-1, 1] """
-        SSIM_loss = 1 - ms_ssim(x_gen, x_real, data_range=1, size_average=True)
-        return SSIM_loss
+
 
     
     def perceptual_loss_wrapper(self, x_gen, x_real, normalize=True):
