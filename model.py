@@ -47,6 +47,7 @@ class Model(nn.Module):
         self.noise_dim = 32
         self.sample_noise = False
         self.normalize_input_image = True
+        self.use_latent_mixture_model = False
 
         #Trainable
         self.Encoder = encoder.Encoder(self.image_dims, C=self.latent_channels)
