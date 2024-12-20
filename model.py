@@ -176,9 +176,17 @@ class Model(nn.Module):
         return torch.mean(sq_err)
 
     def perceptual_ssim_loss(self, x_gen, x_real):
-        """ Assumes inputs are in [0, 1] if normalize=True, else [-1, 1] """
-        SSIM_loss = 1 - ssim(x_gen, x_real, data_range=1, size_average=True)
-        return SSIM_loss
+        # Convert PyTorch tensors to NumPy arrays
+        x_real = x_real.detach().cpu().numpy()
+        x_gen = x_gen.detach().cpu().numpy()
+
+        # Ensure the images are in the correct format (height, width, channels)
+        x_real = np.moveaxis(x_real, 1, -1)  # Move the channel dimension to the last axis
+        x_gen = np.moveaxis(x_gen, 1, -1)  # Move the channel dimension to the last axis
+
+        # Compute SSIM for the batch with a smaller window size and correct channel_axis
+        return np.mean([ssim(x_real[i], x_gen[i], data_range=1, win_size=3, channel_axis=-1) for i in range(x_real.shape[0])])  # Average SSIM for batch
+
 
 
     
