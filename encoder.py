@@ -12,10 +12,10 @@ from tqdm import tqdm
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
-from normalisation import channel, instance
+import channel, instance
 
 class Encoder(nn.Module):
-    def __init__(self, image_dims, batch_size, activation='relu', C=220,
+    def __init__(self, image_dims, batch_size = 1, activation='relu', C=220,
                  channel_norm=True):
         """ 
         Encoder with convolutional architecture proposed in [1].
