@@ -15,8 +15,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import channel, instance
 
 class Encoder(nn.Module):
-    def __init__(self, image_dims, batch_size = 1, activation='relu', C=220,
-                 channel_norm=True):
+    def __init__(self, image_dims, C=220, 
+                 activation='relu', channel_norm=True):
         """ 
         Encoder with convolutional architecture proposed in [1].
         Projects image x ([C_in,256,256]) into a feature map of size C x W/16 x H/16
