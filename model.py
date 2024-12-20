@@ -73,9 +73,6 @@ class Model(nn.Module):
 
         # self.Hyperprior = self.load_submodel(self.Hyperprior, self.checkpoint, freeze=self.optimal_latent, sub_model = "Hyperprior")
 
-        
-        self.init_optimizer()
-
         self.squared_difference = torch.nn.MSELoss(reduction='none')
         # Expects [-1,1] images or [0,1] with normalize=True flag
         self.perceptual_ssim_loss
