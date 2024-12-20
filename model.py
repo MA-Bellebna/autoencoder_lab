@@ -19,7 +19,8 @@ import losses
 import utils, metrics
 import encoder, generator
 
-from pytorch_msssim import ssim, ms_ssim
+from skimage.metrics import structural_similarity as ssim
+from pytorch_msssim import ms_ssim
 
 Intermediates = namedtuple("Intermediates",
     ["input_image",             # [0, 1] (after scaling from [0, 255])
