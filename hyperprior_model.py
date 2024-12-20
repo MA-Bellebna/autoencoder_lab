@@ -5,7 +5,7 @@ import numpy as np
 from tqdm import tqdm
 
 # Custom
-from src.helpers import maths, utils
+import maths, utils
 import entropy_models, entropy_coding
 import compression_utils
 

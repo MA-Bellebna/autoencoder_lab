@@ -5,9 +5,9 @@ import numpy as np
 from tqdm import tqdm
 
 # Custom
-from src.helpers import maths
-from src.compression import entropy_models, entropy_coding
-from src.compression import compression_utils
+import maths
+import entropy_models, entropy_coding
+import compression_utils
 
 lower_bound_toward = maths.LowerBoundToward.apply
 
