@@ -54,14 +54,14 @@ class Model(nn.Module):
         #Trainable
         self.Encoder = encoder.Encoder(self.image_dims, C=self.latent_channels)
         
-        # self.Encoder = self.load_submodel(self.Encoder, self.checkpoint, freeze = self.optimal_latent, sub_model = 'Encoder')
+        self.Encoder = self.load_submodel(self.Encoder, self.checkpoint, freeze = self.optimal_latent, sub_model = 'Encoder')
 
         #Non Trainable
         self.Decoder = generator.Generator(self.image_dims, 1, C=self.latent_channels,
             n_residual_blocks=self.n_residual_blocks, channel_norm=self.use_channel_norm, sample_noise=
             self.sample_noise, noise_dim=self.noise_dim)
         
-        # self.Decoder = self.load_submodel(self.Decoder, self.checkpoint, False)   # Load pretrained HiFI weights 
+        self.Decoder = self.load_submodel(self.Decoder, self.checkpoint, False)   # Load pretrained HiFI weights 
 
         if self.use_latent_mixture_model is True:
             self.Hyperprior = hyperprior.HyperpriorDLMM(bottleneck_capacity=self.latent_channels,
@@ -71,7 +71,7 @@ class Model(nn.Module):
                 likelihood_type=self.likelihood_type, entropy_code=self.entropy_code)
 
 
-        # self.Hyperprior = self.load_submodel(self.Hyperprior, self.checkpoint, freeze=self.optimal_latent, sub_model = "Hyperprior")
+        self.Hyperprior = self.load_submodel(self.Hyperprior, self.checkpoint, freeze=self.optimal_latent, sub_model = "Hyperprior")
 
         self.squared_difference = torch.nn.MSELoss(reduction='none')
         # Expects [-1,1] images or [0,1] with normalize=True flag
