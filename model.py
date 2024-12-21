@@ -100,8 +100,9 @@ class Model(nn.Module):
         model : Generator 
 
         """
-            
-        load = torch.load(path)
+        
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        load = torch.load(path, map_location = device)
 
         new_state_dict = {}
         for name, weight in load['model_state_dict'].items():
